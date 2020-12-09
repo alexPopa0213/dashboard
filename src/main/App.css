@@ -1,0 +1,20 @@
+.App {
+    text-align: center;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.serverInstance {
+    border: 1px solid green;
+    padding: 10px;
+    margin: 15px;
+    height: 300px;
+    width: 500px;
+    border-radius: 20px;
+}
