@@ -7,15 +7,15 @@ function App() {
         <div className="App">
             <h1>Dashboard</h1>
             <div className="dashboard">
-                <ServerInstance name="1"/>
-                <ServerInstance name="2"/>
-                <ServerInstance name="3"/>
-                <ServerInstance name="4"/>
-                <ServerInstance name="5"/>
-                <ServerInstance name="6"/>
-                <ServerInstance name="7"/>
-                <ServerInstance name="8"/>
-                <ServerInstance name="9"/>
+                <ServerInstance name="1" port="8001"/>
+                <ServerInstance name="2" port="8001"/>
+                <ServerInstance name="3" port="8001"/>
+                <ServerInstance name="4" port="8001"/>
+                <ServerInstance name="5" port="8001"/>
+                <ServerInstance name="6" port="8001"/>
+                <ServerInstance name="7" port="8001"/>
+                <ServerInstance name="8" port="8001"/>
+                <ServerInstance name="9" port="8001"/>
             </div>
         </div>
     );

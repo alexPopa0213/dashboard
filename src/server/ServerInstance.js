@@ -1,40 +1,45 @@
 import React, {Component} from 'react';
+import LogEntry from "./LogEntry";
 
 class ServerInstance extends Component {
     constructor(props) {
         super(props);
         this.state = {
             logEntries: [],
-            contacts: 'empty',
-            errorState: true
+            errorState: true,
         }
     }
 
     render() {
         return <div className="serverInstance"
                     style={{
-                        backgroundColor: this.state.errorState ? '#fac9d0' : '#d5fbcf',
+                        backgroundColor: this.state.errorState ? '#ffeff3' : '#e2ffdc',
                     }}>
             <h3>server {this.props.name}</h3>
+            <div className="log-size">size: {this.state.logEntries.length}</div>
             <div className="data">
-                <p>{this.state.contacts.substr(0, 100)}</p>
+                {this.state.logEntries.map((logEntry) => {
+                    return <LogEntry term={logEntry.term} cmd={logEntry.command} index={logEntry.index}/>
+                })}
             </div>
         </div>
     }
 
     async componentDidMount() {
-        setInterval(async => this.callAPI(), 1000);
+        setInterval(() => this.callAPI(), 100);
     }
 
     async callAPI() {
-        return await fetch('http://jsonplaceholder.typicode.com/users')
-            .then(res => res.text())
+        let url = 'http://localhost:' + this.props.port + '/api/entries';
+        return await fetch(url)
+            .then(res => res.json())
             .then((data) => {
                 this.setState({errorState: false})
-                this.setState({contacts: data})
+                this.setState({logEntries: data})
             })
             .catch(reason => {
                 this.setState({errorState: true})
+                this.setState({logEntries: []})
                 console.log(reason);
             });
     }

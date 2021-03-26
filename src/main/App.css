@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+    font-family: "Al Bayan", serif;
 }
 
 .dashboard {
@@ -11,10 +12,37 @@
 }
 
 .serverInstance {
-    border: 1px solid green;
+    border: 2px solid #919191;
     padding: 10px;
     margin: 15px;
-    height: 300px;
-    width: 500px;
+    height: 350px;
+    width: 250px;
     border-radius: 20px;
+}
+
+.log-size {
+    text-align: left;
+    font-weight: bold;
+}
+
+.log-entry {
+    background-color: #d5fdcd;
+    border: 1px dotted #919191;
+    border-radius: 5px;
+    font-size: 15px;
+    margin: 1px;
+}
+
+.log-entry #term-value {
+    color: #2730ff;
+    font-weight: bold;
+}
+
+.log-entry #cmd-value {
+    color: darkred;
+    font-weight: bold;
+}
+
+.log-entry #entry-text {
+    margin: 0;
 }
