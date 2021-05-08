@@ -39,7 +39,6 @@ class ServerInstance extends Component {
             })
             .catch(reason => {
                 this.setState({errorState: true})
-                this.setState({logEntries: []})
                 console.log(reason);
             });
     }
