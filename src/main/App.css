@@ -26,10 +26,10 @@
 }
 
 .log-entry {
-    background-color: #d5fdcd;
+    background-color: #ebfafa;
     border: 1px dotted #919191;
     border-radius: 5px;
-    font-size: 15px;
+    font-size: 12px;
     margin: 1px;
 }
 
@@ -45,4 +45,16 @@
 
 .log-entry #entry-text {
     margin: 0;
+}
+
+.server-state{
+    font-weight: bold;
+    font-style: italic;
+    font-size: 15px;
+    color: blue;
+}
+
+h3 {
+    margin-bottom: 0px;
+    margin-top: 0px;
 }
