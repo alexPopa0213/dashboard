@@ -7,6 +7,7 @@ class ServerInstance extends Component {
         this.state = {
             logEntries: [],
             serverState: "off",
+            electionTimeout: "/",
             errorState: true,
         }
     }
@@ -41,15 +42,21 @@ class ServerInstance extends Component {
                         backgroundColor: this.state.errorState ? '#f2f2f2' : '#e6ffff',
                     }}>
             <h3>server {this.props.name}</h3>
-            <div className="server-state">state: {this.state.serverState}</div>
-            <div className="log-size">size: {this.state.errorState ? 0 : this.state.logEntries.length - 1}</div>
+            <div className="server-state">
+                <span className={(this.state.serverState=="LEADER" ? "leader" : "no-lider")}>
+                    state: {this.state.serverState}
+                </span>
+            </div>
+            <div className="server-timeout">timeout: {this.state.electionTimeout}</div>
+            <div className="log-size">size: {this.state.logEntries.length > 0 ? this.state.logEntries.length - 1 : 0}</div>
             {dataComponent}
         </div>
     }
 
     async componentDidMount() {
-        setInterval(() => this.callGetEntriesEndpoint(), 100);
-        setInterval(() => this.callGetServerStateEndpoint(), 100);
+        setInterval(() => this.callGetServerElectionTimeoutEndpoint(), 2000);
+        setInterval(() => this.callGetEntriesEndpoint(), 200);
+        setInterval(() => this.callGetServerStateEndpoint(), 300);
     }
 
     async callGetServerStateEndpoint(){
@@ -64,6 +71,19 @@ class ServerInstance extends Component {
                     console.log(reason);
                 });
     }
+
+    async callGetServerElectionTimeoutEndpoint(){
+        let url = 'http://localhost:' + this.props.port + '/api/timeout';
+        return await fetch(url)
+                   .then((res) => res.json())
+                   .then((data) => {
+                       this.setState({electionTimeout: data})
+                   })
+                   .catch(reason => {
+                       this.setState({electionTimeout: "/"})
+                       console.log(reason);
+                   });
+       }
 
     async callGetEntriesEndpoint() {
         let url = 'http://localhost:' + this.props.port + '/api/entries';
